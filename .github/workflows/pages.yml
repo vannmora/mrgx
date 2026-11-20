@@ -26,11 +26,15 @@ jobs:
         with:
           node-version: 24
           cache: npm
+          cache-dependency-path: miss-me/package-lock.json
       - run: npm ci
+        working-directory: miss-me
       - run: npm run build
+        working-directory: miss-me
       - run: cp index.html styles.css dist/
+        working-directory: miss-me
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
+          path: miss-me/dist
       - uses: actions/deploy-pages@v4
         id: deployment
