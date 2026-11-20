@@ -5,10 +5,10 @@ const SAMPLES = 4096;
 const FORM_TIME = 2.8;
 const CYCLE_TIME = 18;
 const LAYERS = [
-  { count: 670, color: '#ed1237', glow: 4, width: .65, opacity: .34 },
-  { count: 680, color: '#ff284e', glow: 7, width: .54, opacity: .45 },
-  { count: 650, color: '#ff5275', glow: 9, width: .48, opacity: .56 },
-  { count: 360, color: '#ffc2d1', glow: 11, width: .45, opacity: .76 },
+  { count: 670, color: '#577b9f', glow: 4, width: .65, opacity: .34 },
+  { count: 680, color: '#7197bd', glow: 7, width: .54, opacity: .45 },
+  { count: 650, color: '#9ebbd9', glow: 9, width: .48, opacity: .56 },
+  { count: 360, color: '#d5e5f5', glow: 11, width: .45, opacity: .76 },
 ];
 
 const outline = Array.from({ length: SAMPLES }, (_, index) => {

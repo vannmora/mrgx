@@ -3,27 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#10182b">
+  <meta name="theme-color" content="#172332">
   <title>I have something for you</title>
-  <link rel="stylesheet" href="styles.css?v=29">
-  <script type="module" src="./heart.js"></script>
+  <link rel="stylesheet" href="styles.css?v=36">
+  <script type="module" src="./heart.js?v=34"></script>
 </head>
 <body>
   <div id="heart-root" aria-hidden="true"></div>
   <main class="card">
     <section id="question" aria-label="A question for you">
       <div class="question-stage">
-        <button class="envelope-button question-trigger" id="show-question" type="button" aria-controls="question-content">
+        <button class="envelope-button question-trigger" id="show-question" type="button" autocomplete="off" aria-controls="question-content" aria-label="To Marga. I have something for you">
           <span class="envelope-art" aria-hidden="true">
             <span class="envelope-paper"></span>
             <span class="envelope-pocket"></span>
             <span class="envelope-flap"></span>
             <span class="envelope-seal">♥</span>
+            <span class="envelope-address">To Marga</span>
           </span>
           <span class="envelope-label">I have something for you</span>
         </button>
         <div id="question-content" hidden>
-          <h1 id="question-title" tabindex="-1">I miss you</h1>
+          <h1 id="question-title" tabindex="-1">IMISSSS<wbr>YOUUUUUUUUUUUUU</h1>
           <div class="choices">
             <button class="yes" id="yes" type="button">miss u too ♥</button>
             <div class="no-slot"><button class="no" id="no" type="button">no</button></div>
@@ -48,7 +49,7 @@
           <button class="show-letter" id="show-letter" type="button" hidden>Show full letter</button>
         </header>
         <div class="message">
-          <p class="greeting">Hi, my Marga! 💗</p>
+          <p class="greeting">Hi, my Marga! 💙</p>
           <p>This letter is just for you.</p>
           <p>I miss youuu, and I also want you to know how much I really like you. You make my heart feel so full, and I always feel happy, comfortable, and safe whenever I'm with you. I love every moment we spend together, even the simplest ones. Everything just feels so light and easy when I'm with you. Somehow, you always manage to make my days better without even trying, hehe.</p>
           <p>I really appreciate you and everything you do, even the little things. I hope you know how much you mean to me. I want you to know that I'll always do my best to take care of you and protect your heart, because you deserve to be loved and treated right.</p>
@@ -61,6 +62,7 @@
             <span class="bouquet-vase"></span>
           </div>
         </div>
+        <button class="replay" id="replay" type="button" aria-label="Replay from the beginning" title="Replay from the beginning" hidden><span aria-hidden="true">↻</span></button>
       </div>
       <template id="flower-template">
         <div class="flower">
@@ -98,6 +100,7 @@
     const message = document.querySelector('.message');
     const more = document.querySelector('#more');
     const extraMessage = document.querySelector('#extra-message');
+    const replay = document.querySelector('#replay');
     const bouquet = document.querySelector('.bouquet');
     const flowerTemplate = document.querySelector('#flower-template');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -123,13 +126,18 @@
         return;
       }
 
-      const paragraphs = Array.from(message.querySelectorAll('p'), element => ({
-        element,
-        text: element.textContent,
-        characters: Array.from(element.textContent),
-      }));
       message.setAttribute('aria-busy', 'true');
-      for (const { element } of paragraphs) element.hidden = true;
+      const paragraphs = Array.from(message.querySelectorAll('p'), element => {
+        const text = element.textContent;
+        const reserve = document.createElement('span');
+        const output = document.createElement('span');
+        reserve.className = 'typing-reserve';
+        reserve.setAttribute('aria-hidden', 'true');
+        reserve.textContent = text;
+        element.classList.add('typing-line');
+        element.replaceChildren(reserve, output);
+        return { element, output, text, characters: Array.from(text) };
+      });
       showLetter.hidden = false;
       let index = 0;
       let offset = 0;
@@ -140,8 +148,7 @@
         showLetter.removeEventListener('click', finishTyping);
         for (const { element, text } of paragraphs) {
           element.textContent = text;
-          element.hidden = false;
-          element.classList.remove('typing');
+          element.classList.remove('typing-line');
         }
         if (document.activeElement === showLetter) letterTitle.focus({ preventScroll: true });
         showLetter.hidden = true;
@@ -150,11 +157,10 @@
       }
 
       function typeNext() {
-        const { element, characters } = paragraphs[index];
+        const { output, characters } = paragraphs[index];
         offset += 10;
-        element.textContent = characters.slice(0, offset).join('');
-        element.hidden = false;
-        element.classList.toggle('typing', offset < characters.length);
+        output.textContent = characters.slice(0, offset).join('');
+        output.classList.toggle('typing', offset < characters.length);
 
         if (offset >= characters.length) {
           index++;
@@ -168,7 +174,7 @@
       }
 
       showLetter.addEventListener('click', finishTyping);
-      typeNext();
+      timer = window.setTimeout(typeNext, 150);
     }
 
     more.addEventListener('click', () => {
@@ -178,25 +184,28 @@
           [19, 29, -18, .79], [83, 29, 15, .79], [42, 34, -10, .87],
           [60, 36, 9, .86], [30, 48, -17, .73], [71, 49, 17, .73],
         ];
-        flowers.forEach(([left, top, tilt, size], index) => {
+        flowers.forEach(([left, top, tilt, size]) => {
           const flower = flowerTemplate.content.firstElementChild.cloneNode(true);
           flower.style.setProperty('--flower-x', left + 'cqi');
           flower.style.setProperty('--flower-y', top + 'px');
           flower.style.setProperty('--flower-tilt', tilt + 'deg');
           flower.style.setProperty('--flower-size', size);
-          flower.style.setProperty('--flower-delay', index * 70 + 'ms');
+          flower.style.setProperty('--flower-delay', (180 + Math.abs(50 - left) * 11) + 'ms');
           bouquet.append(flower);
         });
       }
       more.setAttribute('aria-expanded', 'true');
       more.hidden = true;
       extraMessage.hidden = false;
+      replay.hidden = false;
       extraMessage.focus({ preventScroll: true });
       extraMessage.scrollIntoView({
         behavior: reducedMotion.matches ? 'instant' : 'smooth',
         block: 'nearest',
       });
     });
+
+    replay.addEventListener('click', () => window.location.reload());
 
     function dodge(event) {
       const padding = 12;
