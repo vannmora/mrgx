@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#100b10">
-  <title>Do you miss me?</title>
-  <link rel="stylesheet" href="styles.css?v=16">
+  <title>IMISSYOUUUUUUUUUU</title>
+  <link rel="stylesheet" href="styles.css?v=22">
   <script type="module" src="./heart.js"></script>
 </head>
 <body>
@@ -13,12 +13,12 @@
     <section id="question" aria-label="A question for you">
       <div id="heart-root" aria-hidden="true"></div>
       <div class="question-stage">
-        <button class="yes question-trigger" id="show-question" type="button" aria-controls="question-content">I have a question for you?</button>
+        <button class="yes question-trigger" id="show-question" type="button" aria-controls="question-content">A little something for you</button>
         <div id="question-content" hidden>
-          <h1 id="question-title" tabindex="-1">Do you <em>miss me?</em></h1>
+          <h1 id="question-title" tabindex="-1">IMISS<wbr>YOUUUUUUUUUU</h1>
           <div class="choices">
-            <button class="yes" id="yes" type="button">Yes ♥</button>
-            <div class="no-slot"><button class="no" id="no" type="button">No</button></div>
+            <button class="yes" id="yes" type="button">miss u too ♥</button>
+            <div class="no-slot"><button class="no" id="no" type="button">no</button></div>
           </div>
         </div>
       </div>
@@ -32,13 +32,13 @@
           <span class="envelope-flap"></span>
           <span class="envelope-seal">♥</span>
         </span>
-        <span>Open your letter</span>
-      </button>
+        <span>PLEASEE OPENN BABY</span>
+      </button> 
     </section>
     <section id="letter" aria-labelledby="letter-title" hidden>
       <header class="letter-header">
         <span class="letter-seal" aria-hidden="true">♥</span>
-        <h2 id="letter-title" tabindex="-1">For you</h2>
+        <h2 id="letter-title" tabindex="-1">FOR MARGA BABYYYY</h2>
         <button class="show-letter" id="show-letter" type="button" hidden>Show full letter</button>
       </header>
       <div class="message">
@@ -48,18 +48,19 @@
         <p>I really appreciate you and everything you do, even the little things. I hope you know how much you mean to me. I want you to know that I'll always do my best to take care of you and protect your heart, because you deserve to be loved and treated right.</p>
         <p>And every night, I pray that things will work out between us. I don't know exactly what the future holds, but one thing I'm sure of is that I genuinely want things to work out with you. I want us to grow together, make more memories, and continue making each other happy.</p>
         <p>I'm really grateful that I met you, Marga. And I hope I get to keep making you smile the same way you make me smile.</p>
-        <p class="sign-off">I got you, boss. Always. 💗</p>
       </div>
       <button class="more" id="more" type="button" aria-controls="extra-message" aria-expanded="false" hidden>Click here for more</button>
-      <div class="extra-message" id="extra-message" tabindex="-1" hidden>
-        <div class="bouquet" aria-hidden="true"></div>
-        <p>IMISSSSSSYOUUUUUU BOSS SEE YOUUU</p>
+      <div class="extra-message" id="extra-message" role="img" aria-label="A bouquet of nine blue flowers in a glass vase" tabindex="-1" hidden>
+        <div class="bouquet" aria-hidden="true">
+          <span class="bouquet-vase"></span>
+        </div>
       </div>
       <template id="flower-template">
         <div class="flower">
-          <span class="flower-stem"></span>
-          <span class="flower-leaf"></span>
-          <span class="flower-leaf"></span>
+          <span class="flower-stem">
+            <span class="flower-leaf"></span>
+            <span class="flower-leaf"></span>
+          </span>
           <span class="flower-bloom">
             <span class="flower-petal" style="--petal-angle: 0deg"></span>
             <span class="flower-petal" style="--petal-angle: 60deg"></span>
@@ -163,7 +164,7 @@
         ];
         flowers.forEach(([left, top, tilt, size], index) => {
           const flower = flowerTemplate.content.firstElementChild.cloneNode(true);
-          flower.style.setProperty('--flower-x', left + '%');
+          flower.style.setProperty('--flower-x', left + 'cqi');
           flower.style.setProperty('--flower-y', top + 'px');
           flower.style.setProperty('--flower-tilt', tilt + 'deg');
           flower.style.setProperty('--flower-size', size);
@@ -172,6 +173,7 @@
         });
       }
       more.setAttribute('aria-expanded', 'true');
+      more.hidden = true;
       extraMessage.hidden = false;
       extraMessage.focus({ preventScroll: true });
       extraMessage.scrollIntoView({

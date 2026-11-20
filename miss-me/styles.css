@@ -131,21 +131,28 @@ h1, h2 {
   text-wrap: balance;
 }
 
-#question-title em {
-  color: #c4ddff;
-  font-weight: inherit;
-}
-
 .question-stage {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   place-items: center;
   min-height: 130px;
+}
+
+#question-content {
+  width: 100%;
+  min-width: 0;
+}
+
+#question-title {
+  font-size: clamp(1.65rem, 6vw, 2.15rem);
+  overflow-wrap: anywhere;
 }
 
 #question-title:focus, #letter-title:focus, .extra-message:focus { outline: none; }
 
 .choices {
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
   align-items: center;
   justify-content: center;
@@ -179,26 +186,31 @@ button:focus-visible { outline: 3px solid #638dc4; outline-offset: 4px; }
 .no.moving { position: fixed; z-index: 2; box-shadow: 0 4px 16px #16335b29; }
 
 .card:has(#letter:not([hidden])) {
-  width: min(100%, 650px);
-  padding: clamp(24px, 6vw, 47px);
-  border-color: #e8f1ff;
-  border-top: 5px solid #a8c6ec;
-  background: linear-gradient(155deg, #edf5ff, #fcfdff 280px);
+  width: min(100%, 620px);
+  padding: clamp(23px, 6vw, 46px);
+  border: 1px solid #dbe8f8;
+  background: radial-gradient(ellipse at 50% 0, #e5effc, transparent 240px), #fbfdff;
   color: #193b64;
+  box-shadow: 0 24px 58px #080c1b70;
   text-align: left;
 }
 
 .letter-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 13px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid #c9dbef;
+  display: grid;
+  justify-items: center;
+  gap: 11px;
+  padding-bottom: 24px;
+  text-align: center;
+}
+
+.letter-header::after {
+  content: "";
+  width: min(100%, 180px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #91afd1, transparent);
 }
 
 .show-letter {
-  margin-left: auto;
   padding-inline: 12px;
   border-color: #bacfe9;
   font-size: .9rem;
@@ -208,30 +220,32 @@ button:focus-visible { outline: 3px solid #638dc4; outline-offset: 4px; }
 .letter-seal {
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 11px;
-  background: #dcecff;
+  width: 35px;
+  height: 35px;
+  border: 1px solid #b8d0eb;
+  border-radius: 50%;
+  background: #f4f9ff;
   color: #315e98;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 #letter-title {
   color: #254a77;
-  font-size: clamp(1.6rem, 5vw, 2.15rem);
-  font-style: italic;
+  font-size: clamp(1.25rem, 4.5vw, 1.8rem);
+  letter-spacing: .015em;
 }
 
 .message {
-  margin-top: 20px;
+  max-width: 52ch;
+  margin-inline: auto;
   color: #29496e;
-  font-size: clamp(1rem, 2.6vw, 1.125rem);
-  line-height: 1.6;
+  font-size: clamp(1rem, 2.2vw, 1.1rem);
+  line-height: 1.68;
   overflow-wrap: anywhere;
 }
 
 .message p { margin: 0; }
-.message p + p { margin-top: .9em; }
+.message p + p { margin-top: .85em; }
 .message .typing::after {
   content: "";
   display: inline-block;
@@ -240,100 +254,125 @@ button:focus-visible { outline: 3px solid #638dc4; outline-offset: 4px; }
   margin-left: 3px;
   background: #769acb;
 }
-.message .greeting { font-size: 1.2em; color: #193b64; }
-.message .sign-off {
-  width: fit-content;
-  margin-top: 1em;
-  padding: .32em .75em;
-  border-left: 2px solid #82aadd;
-  border-radius: 0 8px 8px 0;
-  background: #eaf3ff;
-  color: #254a77;
-  font-style: italic;
-  font-weight: 700;
-}
-
+.message .greeting { font-size: 1.2em; font-style: italic; color: #193b64; }
 .more {
-  margin-top: 22px;
+  margin: 26px auto 0;
   border-color: #365b8d;
-  background: linear-gradient(145deg, #456da1, #2d507f);
+  padding-inline: 22px;
+  background: #315783;
   color: #fff;
-  box-shadow: 0 4px 12px #2d507f26;
+  box-shadow: 0 4px 12px #2d507f29;
 }
+.more:not([hidden]) { display: block; }
 .more:hover { background: #234571; }
-.more[aria-expanded="true"] { box-shadow: none; }
 
 .extra-message {
-  margin: 16px 0 0;
-  padding: 16px;
-  border: 1px solid #c5dbf3;
-  border-radius: 18px;
-  background: radial-gradient(ellipse at 50% 15%, #fff, #e7f2ff 80%);
-  color: #214578;
-  font: 700 1rem/1.5 Georgia, serif;
-  text-align: center;
-  overflow-wrap: anywhere;
+  margin: 28px 0 0;
+  padding: 15px 0 4px;
   scroll-margin-block: 18px;
 }
-.extra-message p { margin: 7px 0 4px; }
 
 .bouquet {
   position: relative;
-  width: min(100%, 310px);
-  height: 146px;
+  width: min(100%, 335px);
+  height: 196px;
   margin-inline: auto;
+  container-type: inline-size;
+}
+
+.bouquet::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 3px;
+  width: 112px;
+  height: 19px;
+  translate: -50%;
+  background: radial-gradient(ellipse, #53759e42, transparent 72%);
+}
+
+.bouquet-vase {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 118px;
+  width: 67px;
+  height: 63px;
+  translate: -50%;
+  border: 1px solid #6d97c094;
+  border-radius: 12px 12px 26px 26px / 8px 8px 17px 17px;
+  background:
+    linear-gradient(105deg, #7f9fc541 4%, #ffffffbb 23%, transparent 34%, #ffffff65 79%, #89a9ce52 98%),
+    linear-gradient(transparent 30%, #8eb6df77 31%, #d1e6fa52 33%, #a7c7e675 100%);
+  box-shadow: inset 0 -5px 9px #7899c43d;
+}
+
+.bouquet-vase::before {
+  content: "";
+  position: absolute;
+  inset: -3px -1px auto;
+  height: 8px;
+  border: 1px solid #739dc783;
+  border-radius: 50%;
+  background: linear-gradient(#eaf6ff9c, #a1bfdf75);
 }
 
 .flower {
   position: absolute;
-  top: var(--flower-y);
+  --bloom-y: calc(var(--flower-y) + 31px);
+  --stem-x: calc(50cqi - var(--flower-x));
+  --stem-y: calc(171px - var(--bloom-y));
+  top: var(--bloom-y);
   left: var(--flower-x);
-  width: 76px;
-  height: 95px;
-  transform: translateX(-50%) rotate(var(--flower-tilt)) scale(var(--flower-size));
-  transform-origin: 50% 85%;
 }
 
-.flower:nth-child(3n + 2) .flower-petal {
-  background: linear-gradient(#96bffc, #436ba7);
+.flower:nth-of-type(3n + 2) {
+  --petal-light: #b3d4ff;
+  --petal-shade: #4874ad;
 }
 
-.flower:nth-child(3n) .flower-petal {
-  background: linear-gradient(#d6ebff, #729bd5);
+.flower:nth-of-type(3n) {
+  --petal-light: #e1efff;
+  --petal-shade: #7196cc;
 }
 
 .flower-stem {
   position: absolute;
-  top: 30px;
-  bottom: 3px;
-  left: calc(50% - 2px);
-  width: 4px;
+  top: 0;
+  left: -1.5px;
+  width: 3px;
+  height: hypot(var(--stem-x), var(--stem-y));
   border-radius: 4px;
-  background: #4d816e;
-  transform-origin: bottom;
+  background: linear-gradient(90deg, #4f7d70, #83ac92);
+  rotate: calc(-1 * atan2(var(--stem-x), var(--stem-y)));
+  transform-origin: top center;
 }
 
 .flower-leaf {
   position: absolute;
-  top: 58px;
-  left: calc(50% - 22px);
-  width: 24px;
-  height: 12px;
-  border-radius: 100% 0 100% 0;
-  background: #78ab94;
-  transform: rotate(30deg);
+  top: 27%;
+  right: 1px;
+  width: 17px;
+  height: 9px;
+  border-radius: 100% 0;
+  background: linear-gradient(145deg, #96bba5, #5d8c77);
+  transform: rotate(24deg);
 }
 
 .flower-leaf + .flower-leaf {
-  top: 68px;
-  left: 50%;
-  transform: rotate(-18deg);
+  top: 43%;
+  right: auto;
+  left: 1px;
+  transform: rotate(-18deg) scaleX(-1);
 }
 
 .flower-bloom {
   position: absolute;
-  top: 30px;
-  left: 50%;
+  top: 0;
+  left: 0;
+  rotate: var(--flower-tilt);
+  scale: var(--flower-size);
+  filter: drop-shadow(0 3px 3px #426b9b32);
 }
 
 .flower-petal {
@@ -342,8 +381,12 @@ button:focus-visible { outline: 3px solid #638dc4; outline-offset: 4px; }
   bottom: 0;
   width: 18px;
   height: 25px;
-  border-radius: 55% 55% 44% 44%;
-  background: linear-gradient(#bddcff, #557fbc);
+  border-radius: 66% 48% 44% 42% / 49% 43% 62% 50%;
+  background:
+    radial-gradient(ellipse at 37% 18%, #ffffff85, transparent 42%),
+    radial-gradient(ellipse at 54% 100%, #5077ae78, transparent 50%),
+    radial-gradient(ellipse at 38% 28%, var(--petal-light, #cbe4ff), var(--petal-shade, #5985be) 86%);
+  box-shadow: inset 0 1px 2px #ffffff72, inset 0 -2px 3px #375d9438;
   transform: rotate(var(--petal-angle));
   transform-origin: 50% 100%;
 }
@@ -354,7 +397,10 @@ button:focus-visible { outline: 3px solid #638dc4; outline-offset: 4px; }
   height: 14px;
   border: 2px solid #fff1c8;
   border-radius: 50%;
-  background: #edb96f;
+  background:
+    radial-gradient(circle, #b57d3f59 .6px, transparent .8px) 0 0 / 3px 3px,
+    radial-gradient(circle at 36% 31%, #ffedb6, #dca455 85%);
+  box-shadow: 0 1px 3px #304e7566;
   translate: -50% -50%;
 }
 
@@ -395,7 +441,12 @@ button:focus-visible { outline: 3px solid #638dc4; outline-offset: 4px; }
   }
 }
 
-@keyframes flower-grow { from { transform: scaleY(0); } }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .bouquet { transition: transform 380ms ease; }
+  .extra-message:hover .bouquet { transform: perspective(650px) rotateX(5deg) rotateY(-6deg); }
+}
+
+@keyframes flower-grow { from { transform: scaleY(0); opacity: 0; } }
 @keyframes stage-fade { from { opacity: 0; } }
 @keyframes flower-leaf { from { opacity: 0; scale: .4; } }
 @keyframes flower-open { from { opacity: 0; transform: scale(.12) rotate(-32deg); } }
