@@ -3,19 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#100b10">
-  <title>IMISSYOUUUUUUUUUU</title>
-  <link rel="stylesheet" href="styles.css?v=22">
+  <meta name="theme-color" content="#10182b">
+  <title>I have something for you</title>
+  <link rel="stylesheet" href="styles.css?v=29">
   <script type="module" src="./heart.js"></script>
 </head>
 <body>
+  <div id="heart-root" aria-hidden="true"></div>
   <main class="card">
     <section id="question" aria-label="A question for you">
-      <div id="heart-root" aria-hidden="true"></div>
       <div class="question-stage">
-        <button class="yes question-trigger" id="show-question" type="button" aria-controls="question-content">A little something for you</button>
+        <button class="envelope-button question-trigger" id="show-question" type="button" aria-controls="question-content">
+          <span class="envelope-art" aria-hidden="true">
+            <span class="envelope-paper"></span>
+            <span class="envelope-pocket"></span>
+            <span class="envelope-flap"></span>
+            <span class="envelope-seal">♥</span>
+          </span>
+          <span class="envelope-label">I have something for you</span>
+        </button>
         <div id="question-content" hidden>
-          <h1 id="question-title" tabindex="-1">IMISS<wbr>YOUUUUUUUUUU</h1>
+          <h1 id="question-title" tabindex="-1">I miss you</h1>
           <div class="choices">
             <button class="yes" id="yes" type="button">miss u too ♥</button>
             <div class="no-slot"><button class="no" id="no" type="button">no</button></div>
@@ -25,34 +33,33 @@
     </section>
     <section id="invitation" aria-labelledby="invitation-title" hidden>
       <h2 id="invitation-title">For Marga</h2>
-      <button id="open-envelope" class="envelope-button" type="button">
-        <span class="envelope-art" aria-hidden="true">
-          <span class="envelope-paper"></span>
-          <span class="envelope-pocket"></span>
-          <span class="envelope-flap"></span>
-          <span class="envelope-seal">♥</span>
-        </span>
-        <span>PLEASEE OPENN BABY</span>
-      </button> 
+      <div class="envelope-art delivery-envelope" aria-hidden="true">
+        <span class="envelope-paper"></span>
+        <span class="envelope-pocket"></span>
+        <span class="envelope-flap"></span>
+        <span class="envelope-seal">♥</span>
+      </div>
     </section>
     <section id="letter" aria-labelledby="letter-title" hidden>
-      <header class="letter-header">
-        <span class="letter-seal" aria-hidden="true">♥</span>
-        <h2 id="letter-title" tabindex="-1">FOR MARGA BABYYYY</h2>
-        <button class="show-letter" id="show-letter" type="button" hidden>Show full letter</button>
-      </header>
-      <div class="message">
-        <p class="greeting">Hi, my Marga! 💗</p>
-        <p>This letter is just for you.</p>
-        <p>I miss youuu, and I also want you to know how much I really like you. You make my heart feel so full, and I always feel happy, comfortable, and safe whenever I'm with you. I love every moment we spend together, even the simplest ones. Everything just feels so light and easy when I'm with you. Somehow, you always manage to make my days better without even trying, hehe.</p>
-        <p>I really appreciate you and everything you do, even the little things. I hope you know how much you mean to me. I want you to know that I'll always do my best to take care of you and protect your heart, because you deserve to be loved and treated right.</p>
-        <p>And every night, I pray that things will work out between us. I don't know exactly what the future holds, but one thing I'm sure of is that I genuinely want things to work out with you. I want us to grow together, make more memories, and continue making each other happy.</p>
-        <p>I'm really grateful that I met you, Marga. And I hope I get to keep making you smile the same way you make me smile.</p>
-      </div>
-      <button class="more" id="more" type="button" aria-controls="extra-message" aria-expanded="false" hidden>Click here for more</button>
-      <div class="extra-message" id="extra-message" role="img" aria-label="A bouquet of nine blue flowers in a glass vase" tabindex="-1" hidden>
-        <div class="bouquet" aria-hidden="true">
-          <span class="bouquet-vase"></span>
+      <div class="letter-paper">
+        <header class="letter-header">
+          <span class="letter-seal" aria-hidden="true">♥</span>
+          <h2 id="letter-title" tabindex="-1">FOR MARGA BABYYYY</h2>
+          <button class="show-letter" id="show-letter" type="button" hidden>Show full letter</button>
+        </header>
+        <div class="message">
+          <p class="greeting">Hi, my Marga! 💗</p>
+          <p>This letter is just for you.</p>
+          <p>I miss youuu, and I also want you to know how much I really like you. You make my heart feel so full, and I always feel happy, comfortable, and safe whenever I'm with you. I love every moment we spend together, even the simplest ones. Everything just feels so light and easy when I'm with you. Somehow, you always manage to make my days better without even trying, hehe.</p>
+          <p>I really appreciate you and everything you do, even the little things. I hope you know how much you mean to me. I want you to know that I'll always do my best to take care of you and protect your heart, because you deserve to be loved and treated right.</p>
+          <p>And every night, I pray that things will work out between us. I don't know exactly what the future holds, but one thing I'm sure of is that I genuinely want things to work out with you. I want us to grow together, make more memories, and continue making each other happy.</p>
+          <p>I'm really grateful that I met you, Marga. And I hope I get to keep making you smile the same way you make me smile.</p>
+        </div>
+        <button class="more" id="more" type="button" aria-controls="extra-message" aria-expanded="false" hidden>Click here for more</button>
+        <div class="extra-message" id="extra-message" role="img" aria-label="A bouquet of nine blue flowers in a glass vase" tabindex="-1" hidden>
+          <div class="bouquet" aria-hidden="true">
+            <span class="bouquet-vase"></span>
+          </div>
         </div>
       </div>
       <template id="flower-template">
@@ -83,9 +90,9 @@
     const yes = document.querySelector('#yes');
     const no = document.querySelector('#no');
     const invitation = document.querySelector('#invitation');
-    const openEnvelope = document.querySelector('#open-envelope');
+    const deliveryEnvelope = document.querySelector('.delivery-envelope');
     const heartRoot = document.querySelector('#heart-root');
-    const envelopeSeal = document.querySelector('.envelope-seal');
+    const envelopeSeal = deliveryEnvelope.querySelector('.envelope-seal');
     const letterTitle = document.querySelector('#letter-title');
     const showLetter = document.querySelector('#show-letter');
     const message = document.querySelector('.message');
@@ -96,9 +103,18 @@
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     showQuestion.addEventListener('click', () => {
-      showQuestion.hidden = true;
-      questionContent.hidden = false;
-      document.querySelector('#question-title').focus();
+      const revealQuestion = () => {
+        showQuestion.hidden = true;
+        questionContent.hidden = false;
+        document.querySelector('#question-title').focus();
+      };
+      showQuestion.disabled = true;
+      if (reducedMotion.matches) {
+        revealQuestion();
+      } else {
+        showQuestion.classList.add('opening');
+        window.setTimeout(revealQuestion, 550);
+      }
     });
 
     function typeLetter() {
@@ -218,49 +234,54 @@
     });
 
     yes.addEventListener('click', async () => {
-      const bounds = heartRoot.getBoundingClientRect();
-      const canFly = !reducedMotion.matches && bounds.width > 0 &&
-        heartRoot.querySelector('canvas') && typeof heartRoot.animate === 'function';
-
-      if (canFly) {
-        heartRoot.classList.add('heart-in-flight');
-        Object.assign(heartRoot.style, {
+      const source = heartRoot.querySelector('canvas');
+      const bounds = source?.getBoundingClientRect();
+      let flyingHeart;
+      if (!reducedMotion.matches && bounds?.width && typeof source.animate === 'function') {
+        flyingHeart = document.createElement('canvas');
+        flyingHeart.width = source.width;
+        flyingHeart.height = source.height;
+        flyingHeart.getContext('2d').drawImage(source, 0, 0);
+        flyingHeart.className = 'heart-in-flight';
+        flyingHeart.setAttribute('aria-hidden', 'true');
+        Object.assign(flyingHeart.style, {
           left: bounds.left + 'px',
           top: bounds.top + 'px',
           width: bounds.width + 'px',
           height: bounds.height + 'px',
         });
-        document.body.append(heartRoot);
+        document.body.append(flyingHeart);
         invitation.classList.add('receiving-heart');
-        openEnvelope.disabled = true;
       }
 
       question.hidden = true;
       invitation.hidden = false;
       try {
-        if (canFly) {
+        if (flyingHeart) {
           const seal = envelopeSeal.getBoundingClientRect();
           const x = seal.left + (seal.width - bounds.width) / 2 - bounds.left;
           const y = seal.top + (seal.height - bounds.height) / 2 - bounds.top;
           const scale = seal.width / bounds.width;
-          await heartRoot.animate([
-            { transform: 'scale(1)', opacity: 1, offset: 0 },
-            { transform: 'scale(1.09)', opacity: 1, offset: .21 },
+          await flyingHeart.animate([
+            { transform: 'scale(1)', opacity: .7, offset: 0 },
+            { transform: 'scale(1.09)', opacity: .9, offset: .21 },
             { transform: `translate(${x}px, ${y}px) scale(${scale})`, opacity: .85, offset: .91 },
             { transform: `translate(${x}px, ${y}px) scale(${scale})`, opacity: 0, offset: 1 },
           ], { duration: 740, easing: 'ease-in-out' }).finished;
         }
       } catch {
-        // An interrupted animation still leaves the envelope ready to open.
+        // Continue to the letter if the heart animation is interrupted.
       } finally {
-        document.dispatchEvent(new Event('heart:close'));
-        if (canFly) {
-          heartRoot.remove();
+        if (flyingHeart) {
+          flyingHeart.remove();
           invitation.classList.remove('receiving-heart');
-          invitation.classList.add('heart-delivered');
-          openEnvelope.disabled = false;
         }
-        openEnvelope.focus();
+        if (reducedMotion.matches) {
+          revealLetter();
+        } else {
+          deliveryEnvelope.classList.add('opening');
+          window.setTimeout(revealLetter, 600);
+        }
       }
     });
 
@@ -289,15 +310,6 @@
       }
     }
 
-    openEnvelope.addEventListener('click', () => {
-      openEnvelope.disabled = true;
-      if (reducedMotion.matches) {
-        revealLetter();
-        return;
-      }
-      openEnvelope.classList.add('opening');
-      window.setTimeout(revealLetter, 600);
-    });
 
   </script>
 </body>
