@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "esbuild heart-entry.jsx --bundle --minify --outfile=dist/heart.js",
+    "postbuild": "node -e \"const fs = require('node:fs'); for (const file of ['index.html', 'styles.css']) fs.copyFileSync(file, 'dist/' + file)\"",
     "start": "npm run build && node serve.cjs"
   },
   "dependencies": {

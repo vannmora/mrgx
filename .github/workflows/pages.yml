@@ -31,8 +31,6 @@ jobs:
         working-directory: miss-me
       - run: npm run build
         working-directory: miss-me
-      - run: cp index.html styles.css dist/
-        working-directory: miss-me
       - uses: actions/upload-pages-artifact@v4
         with:
           path: miss-me/dist
