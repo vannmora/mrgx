@@ -1,0 +1,15 @@
+{
+  "name": "miss-me",
+  "private": true,
+  "scripts": {
+    "build": "esbuild heart-entry.jsx --bundle --minify --outfile=dist/heart.js",
+    "start": "npm run build && node serve.cjs"
+  },
+  "dependencies": {
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}
